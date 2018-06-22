@@ -4,8 +4,8 @@ namespace Nip\Application\Bootstrap\Bootstrapers;
 
 use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidPathException;
-use Nip\Application;
 use Symfony\Component\Console\Input\ArgvInput;
+use Nip\Application;
 
 /**
  * Class LoadEnvironmentVariables
@@ -52,7 +52,7 @@ class LoadEnvironmentVariables extends AbstractBootstraper
         }
         $this->setEnvironmentFilePath(
             $app,
-            $app->environmentFile().'.'.env('APP_ENV')
+            $app->environmentFile() . '.' . env('APP_ENV')
         );
     }
 
@@ -65,7 +65,7 @@ class LoadEnvironmentVariables extends AbstractBootstraper
      */
     protected function setEnvironmentFilePath($app, $file)
     {
-        if (file_exists($app->environmentPath().'/'.$file)) {
+        if (file_exists($app->environmentPath() . '/' . $file)) {
             $app->loadEnvironmentFrom($file);
         }
     }

@@ -3,6 +3,7 @@
 namespace Nip\Application\Bootstrap;
 
 use Nip\Application\Bootstrap\Bootstrapers\AbstractBootstraper;
+use Nip\Container\ContainerInterface;
 
 /**
  * Class BootstrapAwareTrait
@@ -10,6 +11,7 @@ use Nip\Application\Bootstrap\Bootstrapers\AbstractBootstraper;
  */
 trait BootstrapAwareTrait
 {
+
     /**
      * Indicates if the application has been bootstrapped before.
      *
@@ -66,10 +68,9 @@ trait BootstrapAwareTrait
      */
     public function getBootstrap($bootstrapper)
     {
-//        if ($this->getContainer() instanceof ContainerInterface) {
-//            return $this->get($bootstrapper);
-//        }
-
+        if ($this->getContainer() instanceof ContainerInterface) {
+            return $this->get($bootstrapper);
+        }
         return new $bootstrapper;
     }
 
@@ -83,13 +84,7 @@ trait BootstrapAwareTrait
         if ($this->bootstrappers === null) {
             $this->initBootstrappers();
         }
-
         return $this->bootstrappers;
-    }
-
-    protected function initBootstrappers()
-    {
-        $this->bootstrappers = $this->getDefaultBootstrappers();
     }
 
     /**
@@ -98,6 +93,11 @@ trait BootstrapAwareTrait
     protected function addBootstrapper($bootstrapper)
     {
         $this->bootstrappers[] = $bootstrapper;
+    }
+
+    protected function initBootstrappers()
+    {
+        $this->bootstrappers = $this->getDefaultBootstrappers();
     }
 
     /**

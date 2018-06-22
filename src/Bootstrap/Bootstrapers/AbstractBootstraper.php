@@ -4,10 +4,6 @@ namespace Nip\Application\Bootstrap\Bootstrapers;
 
 use Nip\Application;
 
-/**
- * Class AbstractBootstraper
- * @package Nip\Application\Bootstrap\Bootstrapers
- */
 abstract class AbstractBootstraper implements BootstraperInterface
 {
     /**

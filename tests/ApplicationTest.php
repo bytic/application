@@ -13,24 +13,10 @@ use Nip\Router\Router;
  */
 class ApplicationTest extends AbstractTest
 {
-    /**
-     * @var Application
-     */
-    protected $application;
 
-    public function testRegisterServices()
+    public function testBooting()
     {
-        $this->application->registerServices();
-//
-//        static::assertInstanceOf(Mailer::class, $this->application->getContainer()->get('mailer'));
-//        static::assertInstanceOf(Modules::class, $this->application->getContainer()->get('mvc.modules'));
-//        static::assertInstanceOf(Dispatcher::class, $this->application->getContainer()->get('dispatcher'));
-        static::assertInstanceOf(Router::class, $this->application->getContainer()->get('router'));
-    }
-
-    protected function setUp()
-    {
-        parent::setUp();
-        $this->application = new Application();
+        $application = new Application();
+        static::assertFalse($application->isBooted());
     }
 }

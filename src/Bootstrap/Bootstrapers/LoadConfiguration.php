@@ -74,7 +74,6 @@ class LoadConfiguration extends AbstractBootstraper
         foreach (Finder::create()->files()->name('*.php')->in($configPath) as $file) {
             $files[basename($file->getRealPath(), '.php')] = $file->getRealPath();
         }
-
         return $files;
     }
 }
