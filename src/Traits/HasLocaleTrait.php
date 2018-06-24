@@ -49,4 +49,26 @@ trait HasLocaleTrait
     {
         return $this->getLocale() == $locale;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEnabledLocale()
+    {
+        /** @var Config $config */
+        $config = $this->get('config');
+        $languages = $config->get('app.locale.enabled');
+
+        return is_array($languages) ? $languages : explode(',', $languages);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDefaultLocale()
+    {
+        /** @var Config $config */
+        $config = $this->get('config');
+        return $config->get('app.locale.default');
+    }
 }
