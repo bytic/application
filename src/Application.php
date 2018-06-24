@@ -5,6 +5,7 @@ namespace Nip\Application;
 use Nip\Application\Bootstrap\CoreBootstrapersTrait;
 use Nip\Application\Traits\BindPathsTrait;
 use Nip\Application\Traits\EnviromentConfiguration;
+use Nip\Application\Traits\HasLocaleTrait;
 use Nip\AutoLoader\AutoLoaderAwareTrait;
 use Nip\Container\ContainerAliasBindingsTrait;
 use Nip\Container\ServiceProviders\ServiceProviderAwareTrait;
@@ -31,6 +32,7 @@ class Application implements ApplicationInterface
     use RouterAwareTrait;
     use DispatcherAwareTrait;
     use StagingAwareTrait;
+    use HasLocaleTrait;
 
     /**
      * The ByTIC framework version.
