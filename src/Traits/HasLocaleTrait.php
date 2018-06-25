@@ -17,9 +17,9 @@ trait HasLocaleTrait
      */
     public function getLocale()
     {
-        $translator = $this->get('translator');
-        /** @noinspection PhpUndefinedMethodInspection */
-        return $translator->getLocale();
+        /** @var Config $config */
+        $config = $this->get('config');
+        return $config->get('app.locale.selected', $this->getDefaultLocale());
     }
 
     /**
