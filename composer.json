@@ -26,10 +26,13 @@
     "php": "^7.0",
     "bytic/config": "^0.9",
     "bytic/database": "^0.9",
+    "bytic/debug": "^0.9",
+    "bytic/debugbar": "^0.9",
     "bytic/dispatcher": "^0.9",
+    "bytic/http": "^0.9",
+    "bytic/mail": "^0.9",
     "bytic/router": "^0.9",
-    "bytic/translation": "^0.9",
-    "bytic/http": "^0.9"
+    "bytic/translation": "^0.9"
   },
   "require-dev": {
     "phpunit/phpunit": "^7.2",

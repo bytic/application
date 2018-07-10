@@ -30,6 +30,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run as WhoopsRun;
+use Nip\Session;
+use Nip\I18n\Translator;
+use Nip\Cookie\Jar as CookieJar;
 
 /**
  * Class Application.
@@ -298,7 +301,7 @@ class Application
             }
 
             if ($domain != 'localhost') {
-                Cookie\Jar::instance()->setDefaults(
+                CookieJar::instance()->setDefaults(
                     ['domain' => '.'.$domain]
                 );
             }
@@ -536,7 +539,7 @@ class Application
     }
 
     /**
-     * @return I18n\Translator
+     * @return Translator
      */
     public function getTranslator()
     {
@@ -556,11 +559,11 @@ class Application
     }
 
     /**
-     * @return I18n\Translator
+     * @return Translator
      */
     public function newTranslator()
     {
-        return new I18n\Translator();
+        return new Translator();
     }
 
     /**
