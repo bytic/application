@@ -21,6 +21,7 @@ use Nip\Http\Response\ResponseFactory;
 use Nip\Logger\Manager as LoggerManager;
 use Nip\Mail\MailServiceProvider;
 use Nip\Mvc\MvcServiceProvider;
+use Nip\Request;
 use Nip\Router\RouterAwareTrait;
 use Nip\Router\RouterServiceProvider;
 use Nip\Staging\StagingAwareTrait;
