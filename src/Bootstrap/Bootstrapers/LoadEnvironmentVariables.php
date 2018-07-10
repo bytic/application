@@ -4,7 +4,7 @@ namespace Nip\Application\Bootstrap\Bootstrapers;
 
 use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidPathException;
-use Nip\Application;
+use Nip\Application\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 
 /**

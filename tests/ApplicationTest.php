@@ -20,17 +20,21 @@ class ApplicationTest extends AbstractTest
 
     public function testRegisterServices()
     {
-        $this->application->registerServices();
+        $application = new Application();
+        $application->registerServices();
 //
 //        static::assertInstanceOf(Mailer::class, $this->application->getContainer()->get('mailer'));
 //        static::assertInstanceOf(Modules::class, $this->application->getContainer()->get('mvc.modules'));
 //        static::assertInstanceOf(Dispatcher::class, $this->application->getContainer()->get('dispatcher'));
-        static::assertInstanceOf(Router::class, $this->application->getContainer()->get('router'));
+        static::assertInstanceOf(Router::class, $application->getContainer()->get('router'));
     }
 
-    protected function setUp()
-    {
-        parent::setUp();
-        $this->application = new Application();
-    }
+//    public function testBootstrap()
+//    {
+//        $application = new Application();
+//        $application->bootstrap();
+//
+//        self::assertTrue($application->hasBeenBootstrapped());
+//    }
+
 }
