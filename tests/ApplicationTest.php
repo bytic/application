@@ -13,7 +13,6 @@ use Nip\Router\Router;
  */
 class ApplicationTest extends AbstractTest
 {
-
     public function testBooting()
     {
         $application = new Application();
