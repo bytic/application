@@ -16,6 +16,7 @@ use Nip\DebugBar\DataCollector\RouteCollector;
 use Nip\DebugBar\StandardDebugBar;
 use Nip\Dispatcher\DispatcherAwareTrait;
 use Nip\Dispatcher\DispatcherServiceProvider;
+use Nip\Filesystem\FilesystemServiceProvider;
 use Nip\Http\Response\Response;
 use Nip\Http\Response\ResponseFactory;
 use Nip\Logger\Manager as LoggerManager;
@@ -112,6 +113,7 @@ class Application
         $this->getContainer()->addServiceProvider(DispatcherServiceProvider::class);
         $this->getContainer()->addServiceProvider(StagingServiceProvider::class);
         $this->getContainer()->addServiceProvider(RouterServiceProvider::class);
+        $this->getContainer()->addServiceProvider(FilesystemServiceProvider::class);
     }
 
     public function setupRequest()
@@ -229,7 +231,7 @@ class Application
         $stage = $this->getStaging()->getStage();
         $pathInfo = $this->getRequest()->getHttp()->getBaseUrl();
 
-        $baseURL = $stage->getHTTP().$stage->getHost().$pathInfo;
+        $baseURL = $stage->getHTTP() . $stage->getHost() . $pathInfo;
         define('BASE_URL', $baseURL);
     }
 
@@ -302,7 +304,7 @@ class Application
 
             if ($domain != 'localhost') {
                 CookieJar::instance()->setDefaults(
-                    ['domain' => '.'.$domain]
+                    ['domain' => '.' . $domain]
                 );
             }
             $this->sessionManager->init();
@@ -453,7 +455,7 @@ class Application
 
     /**
      * @param Exception $e
-     * @param Request   $request
+     * @param Request $request
      *
      * @return Response
      */
@@ -477,7 +479,7 @@ class Application
     }
 
     /**
-     * @param Request   $request
+     * @param Request $request
      * @param Exception $e
      *
      * @return Response
@@ -500,7 +502,7 @@ class Application
 
     /** @noinspection PhpUnusedParameterInspection
      *
-     * @param Request  $request
+     * @param Request $request
      * @param Response $response
      *
      * @return Response
@@ -511,7 +513,7 @@ class Application
     }
 
     /**
-     * @param Request  $request
+     * @param Request $request
      * @param Response $response
      */
     public function terminate(Request $request, Response $response)
@@ -521,9 +523,9 @@ class Application
     /**
      * Throw an HttpException with the given data.
      *
-     * @param int    $code
+     * @param int $code
      * @param string $message
-     * @param array  $headers
+     * @param array $headers
      *
      * @throws HttpException
      *

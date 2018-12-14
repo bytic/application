@@ -29,6 +29,7 @@
     "bytic/debug": "^0.9",
     "bytic/debugbar": "^0.9",
     "bytic/dispatcher": "^0.9",
+    "bytic/filesystem": "^0.9",
     "bytic/http": "^0.9",
     "bytic/mail": "^0.9",
     "bytic/router": "^0.9",
