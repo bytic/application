@@ -20,6 +20,7 @@ use Nip\Filesystem\FilesystemServiceProvider;
 use Nip\Http\Response\Response;
 use Nip\Http\Response\ResponseFactory;
 use Nip\Logger\Manager as LoggerManager;
+use Nip\Locale\LocaleServiceProvider;
 use Nip\Mail\MailServiceProvider;
 use Nip\Mvc\MvcServiceProvider;
 use Nip\Request;
@@ -114,6 +115,7 @@ class Application
         $this->getContainer()->addServiceProvider(StagingServiceProvider::class);
         $this->getContainer()->addServiceProvider(RouterServiceProvider::class);
         $this->getContainer()->addServiceProvider(FilesystemServiceProvider::class);
+        $this->getContainer()->addServiceProvider(LocaleServiceProvider::class);
     }
 
     public function setupRequest()
