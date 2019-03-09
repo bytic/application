@@ -2,7 +2,7 @@
 
 namespace Nip\Application\Bootstrap\Bootstrapers;
 
-use Nip\Application;
+use Nip\Application\Application;
 
 abstract class AbstractBootstraper implements BootstraperInterface
 {
