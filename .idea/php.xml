@@ -87,6 +87,10 @@
       <path value="$PROJECT_DIR$/vendor/league/container" />
       <path value="$PROJECT_DIR$/vendor/bytic/google-analytics" />
       <path value="$PROJECT_DIR$/vendor/bytic/locale" />
+      <path value="$PROJECT_DIR$/vendor/bytic/logger" />
+      <path value="$PROJECT_DIR$/vendor/bytic/autoloader" />
+      <path value="$PROJECT_DIR$/vendor/bytic/staging" />
+      <path value="$PROJECT_DIR$/vendor/bytic/mvc" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

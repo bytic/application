@@ -37,7 +37,9 @@
     "bytic/http": "^0.9",
     "bytic/locale": "^0.9",
     "bytic/mail": "^0.9",
+    "bytic/mvc": "^0.9",
     "bytic/router": "^0.9",
+    "bytic/staging": "^0.9",
     "bytic/translation": "^0.9"
   },
   "require-dev": {
