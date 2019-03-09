@@ -24,6 +24,7 @@
   },
   "require": {
     "php": "^7.0",
+    "bytic/autoloader": "^1.0",
     "bytic/config": "^1.0",
     "bytic/database": "^1.0",
     "bytic/debug": "^1.0",
@@ -34,6 +35,7 @@
     "bytic/locale": "^1.0",
     "bytic/mail": "^1.0",
     "bytic/router": "^1.0",
+    "bytic/staging": "^1.0",
     "bytic/translation": "^1.0"
   },
   "require-dev": {

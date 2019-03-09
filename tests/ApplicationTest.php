@@ -18,7 +18,7 @@ class ApplicationTest extends AbstractTest
         $application = new Application();
         static::assertFalse($application->isBooted());
 
-        $application->registerServices();
+        $application->registerConfiguredProviders();
         static::assertInstanceOf(Router::class, $application->getContainer()->get('router'));
     }
 }
