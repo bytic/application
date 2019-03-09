@@ -14,6 +14,9 @@
     },
     "classmap": [
       "legacy"
+    ],
+    "files": [
+      "src/functions/application.php"
     ]
   },
   "autoload-dev": {
@@ -34,6 +37,7 @@
     "bytic/http": "^1.0",
     "bytic/locale": "^1.0",
     "bytic/mail": "^1.0",
+    "bytic/mvc": "^1.0",
     "bytic/router": "^1.0",
     "bytic/staging": "^1.0",
     "bytic/translation": "^1.0"
