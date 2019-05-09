@@ -1,15 +1,17 @@
 <?php
 
-namespace Nip\Application\Tests\Bootstrap\Bootstrappers;
+namespace Nip\Application\Tests\Bootstrap\Bootstrapers;
 
 use Nip\Application\Bootstrap\Bootstrapers\RegisterContainer;
 use Nip\Application\Tests\AbstractTest;
 use Nip\Application\Tests\Fixtures\Application;
+use Nip\Application\Tests\Fixtures\LegacyApplication;
 
 /**
- * Class ApplicationTest.
+ * Class RegisterContainerTest
+ * @package Nip\Application\Tests\Bootstrap\Bootstrapers
  */
-class ApplicationTest extends AbstractTest
+class RegisterContainerTest extends AbstractTest
 {
 
     public function testRegisterServices()
@@ -17,8 +19,19 @@ class ApplicationTest extends AbstractTest
         $application = new Application();
         static::assertFalse($application->hasContainer());
 
-        $bootrapper = new RegisterContainer();
-        $bootrapper->bootstrap($application);
+        $bootstrapper = new RegisterContainer();
+        $bootstrapper->bootstrap($application);
+
+        static::assertTrue($application->hasContainer());
+    }
+
+    public function testRegisterServicesWithLegacyApplication()
+    {
+        $application = new LegacyApplication();
+        static::assertFalse($application->hasContainer());
+
+        $bootstrapper = new RegisterContainer();
+        $bootstrapper->bootstrap($application);
 
         static::assertTrue($application->hasContainer());
     }
