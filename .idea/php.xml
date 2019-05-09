@@ -92,6 +92,9 @@
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
       <path value="$PROJECT_DIR$/vendor/bytic/autoloader" />
       <path value="$PROJECT_DIR$/vendor/bytic/staging" />
+      <path value="$PROJECT_DIR$/vendor/bytic/mvc" />
+      <path value="$PROJECT_DIR$/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/vendor/symfony/config" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
