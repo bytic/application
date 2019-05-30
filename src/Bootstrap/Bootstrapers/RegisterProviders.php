@@ -4,6 +4,10 @@ namespace Nip\Application\Bootstrap\Bootstrapers;
 
 use Nip\Application\Application;
 
+/**
+ * Class RegisterProviders
+ * @package Nip\Application\Bootstrap\Bootstrapers
+ */
 class RegisterProviders extends AbstractBootstraper
 {
     /**

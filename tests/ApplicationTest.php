@@ -2,6 +2,7 @@
 
 namespace Nip\Application\Tests;
 
+use Mockery\Mock;
 use Nip\Application\Application;
 use Nip\Dispatcher\Dispatcher;
 use Nip\Mail\Mailer;
@@ -15,10 +16,13 @@ class ApplicationTest extends AbstractTest
 {
     public function testBooting()
     {
-        $application = new Application();
+        /** @var Application|Mock $application */
+        $application = \Mockery::mock(Application::class)->makePartial();
+        $application->shouldReceive('bootProviders')->once();
+
         static::assertFalse($application->isBooted());
 
-        $application->registerConfiguredProviders();
-        static::assertInstanceOf(Router::class, $application->getContainer()->get('router'));
+        $application->boot();
+        static::assertTrue($application->isBooted());
     }
 }
