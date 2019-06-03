@@ -4,11 +4,13 @@ namespace Nip\Application;
 
 use Exception;
 use Nip\Application\Bootstrap\CoreBootstrapersTrait;
+use Nip\Application\Traits\HasTranslationTrait;
 use Nip\AutoLoader\AutoLoaderAwareTrait;
 use Nip\AutoLoader\AutoLoaderServiceProvider;
 use Nip\Config\ConfigAwareTrait;
 use Nip\Container\Container;
 use Nip\Container\ContainerAliasBindingsTrait;
+use Nip\Cookie\Jar as CookieJar;
 use Nip\Database\Manager as DatabaseManager;
 use Nip\Debug\Debug;
 use Nip\Debug\ErrorHandler;
@@ -19,22 +21,20 @@ use Nip\Dispatcher\DispatcherServiceProvider;
 use Nip\Filesystem\FilesystemServiceProvider;
 use Nip\Http\Response\Response;
 use Nip\Http\Response\ResponseFactory;
-use Nip\Logger\Manager as LoggerManager;
 use Nip\Locale\LocaleServiceProvider;
+use Nip\Logger\Manager as LoggerManager;
 use Nip\Mail\MailServiceProvider;
 use Nip\Mvc\MvcServiceProvider;
 use Nip\Request;
 use Nip\Router\RouterAwareTrait;
 use Nip\Router\RouterServiceProvider;
+use Nip\Session;
 use Nip\Staging\StagingAwareTrait;
 use Nip\Staging\StagingServiceProvider;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run as WhoopsRun;
-use Nip\Session;
-use Nip\I18n\Translator;
-use Nip\Cookie\Jar as CookieJar;
 
 /**
  * Class Application.
@@ -48,6 +48,7 @@ class Application
     use RouterAwareTrait;
     use DispatcherAwareTrait;
     use StagingAwareTrait;
+    use HasTranslationTrait;
 
     /**
      * Indicates if the application has "booted".
@@ -338,15 +339,6 @@ class Application
         return new Session();
     }
 
-    public function setupTranslation()
-    {
-        $this->initLanguages();
-    }
-
-    public function initLanguages()
-    {
-    }
-
     public function setupLocale()
     {
     }
@@ -540,34 +532,6 @@ class Application
         }
 
         throw new HttpException($code, $message, null, $headers);
-    }
-
-    /**
-     * @return Translator
-     */
-    public function getTranslator()
-    {
-        if (!$this->getContainer()->has('translator')) {
-            $this->initTranslator();
-        }
-
-        return $this->getContainer()->get('translator');
-    }
-
-    public function initTranslator()
-    {
-        $translator = $this->newTranslator();
-        $translator->setRequest($this->getRequest());
-
-        Container::getInstance()->set('translator', $translator);
-    }
-
-    /**
-     * @return Translator
-     */
-    public function newTranslator()
-    {
-        return new Translator();
     }
 
     /**
