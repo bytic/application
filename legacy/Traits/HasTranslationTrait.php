@@ -17,7 +17,8 @@ trait HasTranslationTrait
     public function setupTranslation()
     {
         $this->initLanguages();
-        (new LocalizationMiddleware($this->getTranslator()))->detect($this->getRequest());
+        (new LocalizationMiddleware($this->getTranslator(), ['stages' => ['query', 'cookie']]))
+            ->detect($this->getRequest());
     }
 
     public function initLanguages()

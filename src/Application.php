@@ -4,6 +4,7 @@ namespace Nip\Application;
 
 use Exception;
 use Nip\Application\Bootstrap\CoreBootstrapersTrait;
+use Nip\Application\Traits\HasLoggerTrait;
 use Nip\Application\Traits\HasTranslationTrait;
 use Nip\AutoLoader\AutoLoaderAwareTrait;
 use Nip\AutoLoader\AutoLoaderServiceProvider;
@@ -48,7 +49,9 @@ class Application
     use RouterAwareTrait;
     use DispatcherAwareTrait;
     use StagingAwareTrait;
+
     use HasTranslationTrait;
+    use HasLoggerTrait;
 
     /**
      * Indicates if the application has "booted".
@@ -63,16 +66,9 @@ class Application
     protected $request = null;
 
     /**
-     * @var null|LoggerManager
-     */
-    protected $logger = null;
-
-    /**
      * @var null|Session
      */
     protected $sessionManager = null;
-
-    protected $debugBar = null;
 
     public function run()
     {
@@ -131,97 +127,6 @@ class Application
     {
     }
 
-    public function setupErrorHandling()
-    {
-        fix_input_quotes();
-
-        if ($this->getStaging()->getStage()->inTesting()) {
-            Debug::enable(E_ALL, true);
-            $this->getDebugBar()->enable();
-            $this->getDebugBar()->addMonolog($this->getLogger()->getMonolog());
-        } else {
-            Debug::enable(E_ALL & ~E_NOTICE, false);
-        }
-
-        $this->getLogger()->init();
-        $this->getContainer()->get(ErrorHandler::class)->setDefaultLogger($this->getLogger());
-    }
-
-    /**
-     * @return LoggerManager|null
-     */
-    public function getLogger()
-    {
-        if ($this->logger == null) {
-            $this->initLogger();
-        }
-
-        return $this->logger;
-    }
-
-    /**
-     * @param LoggerManager $logger
-     *
-     * @return $this
-     */
-    public function setLogger($logger)
-    {
-        $this->logger = $logger;
-
-        return $this;
-    }
-
-    public function initLogger()
-    {
-        $logger = $this->newLogger();
-        $logger->setBootstrap($this);
-        $this->setLogger($logger);
-    }
-
-    /**
-     * @return LoggerManager
-     */
-    public function newLogger()
-    {
-        $logger = new LoggerManager();
-
-        return $logger;
-    }
-
-    /**
-     * @return StandardDebugBar
-     */
-    public function getDebugBar()
-    {
-        if ($this->debugBar == null) {
-            $this->initDebugBar();
-        }
-
-        return $this->debugBar;
-    }
-
-    /**
-     * @param null $debugBar
-     */
-    public function setDebugBar($debugBar)
-    {
-        $this->debugBar = $debugBar;
-    }
-
-    public function initDebugBar()
-    {
-        $this->setDebugBar($this->newDebugBar());
-    }
-
-    /**
-     * @return StandardDebugBar
-     */
-    public function newDebugBar()
-    {
-        $debugBar = new StandardDebugBar();
-
-        return $debugBar;
-    }
 
     public function setupURLConstants()
     {
@@ -445,53 +350,6 @@ class Application
         }
 
         throw new NotFoundHttpException('No MCA in Request');
-    }
-
-    /**
-     * @param Exception $e
-     * @param Request $request
-     *
-     * @return Response
-     */
-    protected function handleException(Request $request, Exception $e)
-    {
-        $this->reportException($e);
-
-        return $this->renderException($request, $e);
-    }
-
-    /**
-     * Report the exception to the exception handler.
-     *
-     * @param Exception $e
-     *
-     * @return void
-     */
-    protected function reportException(Exception $e)
-    {
-        $this->getLogger()->error($e);
-    }
-
-    /**
-     * @param Request $request
-     * @param Exception $e
-     *
-     * @return Response
-     */
-    protected function renderException(Request $request, Exception $e)
-    {
-        if ($this->getStaging()->getStage()->isPublic()) {
-            $this->getDispatcher()->setErrorController();
-
-            return $this->getResponseFromRequest($request);
-        } else {
-            $whoops = new WhoopsRun();
-            $whoops->allowQuit(false);
-            $whoops->writeToOutput(false);
-            $whoops->pushHandler(new PrettyPageHandler());
-
-            return ResponseFactory::make($whoops->handleException($e));
-        }
     }
 
     /** @noinspection PhpUnusedParameterInspection
