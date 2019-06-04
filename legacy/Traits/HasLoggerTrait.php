@@ -10,6 +10,7 @@ use Nip\DebugBar\StandardDebugBar;
 use Nip\Http\Response\Response;
 use Nip\Http\Response\ResponseFactory;
 use Nip\Request;
+use Whoops\Handler\PrettyPageHandler;
 
 trait HasLoggerTrait
 {
@@ -151,7 +152,7 @@ trait HasLoggerTrait
 
             return $this->getResponseFromRequest($request);
         } else {
-            $whoops = new WhoopsRun();
+            $whoops = new \Whoops\Run();
             $whoops->allowQuit(false);
             $whoops->writeToOutput(false);
             $whoops->pushHandler(new PrettyPageHandler());

@@ -40,7 +40,8 @@
     "bytic/mvc": "^0.9",
     "bytic/router": "^0.9",
     "bytic/staging": "^0.9",
-    "bytic/translation": "^0.9"
+    "bytic/translation": "^0.9",
+    "filp/whoops": "^2.3"
   },
   "require-dev": {
     "phpunit/phpunit": "^7.2",
