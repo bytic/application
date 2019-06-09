@@ -5,6 +5,7 @@ namespace Nip\Application;
 use Exception;
 use Nip\Application\Bootstrap\CoreBootstrapersTrait;
 use Nip\Application\Traits\HasLoggerTrait;
+use Nip\Application\Traits\HasRoutingTrait;
 use Nip\Application\Traits\HasTranslationTrait;
 use Nip\AutoLoader\AutoLoaderAwareTrait;
 use Nip\AutoLoader\AutoLoaderServiceProvider;
@@ -52,6 +53,7 @@ class Application
 
     use HasTranslationTrait;
     use HasLoggerTrait;
+    use HasRoutingTrait;
 
     /**
      * Indicates if the application has "booted".
@@ -125,22 +127,6 @@ class Application
 
     public function setupAutoLoaderPaths()
     {
-    }
-
-
-    public function setupURLConstants()
-    {
-        $this->determineBaseURL();
-        define('CURRENT_URL', $this->getRequest()->getHttp()->getUri());
-    }
-
-    protected function determineBaseURL()
-    {
-        $stage = $this->getStaging()->getStage();
-        $pathInfo = $this->getRequest()->getHttp()->getBaseUrl();
-
-        $baseURL = $stage->getHTTP() . $stage->getHost() . $pathInfo;
-        define('BASE_URL', $baseURL);
     }
 
     /**
@@ -248,17 +234,6 @@ class Application
     {
     }
 
-    public function setupRouting()
-    {
-        $router = $this->getRouter();
-        $router->setRequest($this->getRequest());
-        if ($this->getDebugBar()->isEnabled()) {
-            /** @var RouteCollector $routeCollector */
-            $routeCollector = $this->getDebugBar()->getCollector('route');
-            $routeCollector->setRouter($router);
-        }
-    }
-
     public function boot()
     {
         if ($this->isBooted()) {
@@ -290,7 +265,6 @@ class Application
         try {
             ob_start();
             $this->preHandleRequest();
-
             $this->preRouting();
 
             // check is valid request
@@ -313,10 +287,6 @@ class Application
         $this->getContainer()->singleton('request', $this->getRequest());
     }
 
-    public function preRouting()
-    {
-    }
-
     /**
      * @param Request $request
      *
@@ -329,10 +299,6 @@ class Application
         }
 
         return true;
-    }
-
-    public function postRouting()
-    {
     }
 
     /**
