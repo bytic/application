@@ -26,7 +26,7 @@
     }
   },
   "require": {
-    "php": "^7.0",
+    "php": "^7.1",
     "bytic/autoloader": "^0.9",
     "bytic/config": "^0.9",
     "bytic/database": "^0.9",
