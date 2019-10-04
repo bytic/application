@@ -146,6 +146,12 @@ class Application
      */
     public function initRequest()
     {
+        //Usefull for cron jobs
+        $_SERVER = array_replace([
+            'SERVER_NAME' => 'localhost',
+            'SERVER_PORT' => 80,
+            'HTTP_HOST' => 'localhost'
+        ], $_SERVER);
         $request = Request::createFromGlobals();
         Request::instance($request);
         $this->request = $request;
