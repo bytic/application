@@ -70,7 +70,8 @@ class LoadConfiguration extends AbstractBootstraper
     protected function getConfigurationFiles(Application $app)
     {
         $files = [];
-        $configPath = realpath($app->configPath());
+        $path = method_exists($app, 'configPath') ? $app->configPath() : CONFIG_PATH;
+        $configPath = realpath($path);
         foreach (Finder::create()->files()->name('*.php')->in($configPath) as $file) {
             $files[basename($file->getRealPath(), '.php')] = $file->getRealPath();
         }
