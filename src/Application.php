@@ -4,39 +4,24 @@ namespace Nip\Application;
 
 use Exception;
 use Nip\Application\Bootstrap\CoreBootstrapersTrait;
+use Nip\Application\Traits\DeprecatedRegisterServices;
 use Nip\Application\Traits\HasLoggerTrait;
 use Nip\Application\Traits\HasRoutingTrait;
 use Nip\Application\Traits\HasTranslationTrait;
 use Nip\AutoLoader\AutoLoaderAwareTrait;
-use Nip\AutoLoader\AutoLoaderServiceProvider;
 use Nip\Config\ConfigAwareTrait;
-use Nip\Container\Container;
 use Nip\Container\ContainerAliasBindingsTrait;
+use Nip\Application\Traits\ServiceProviderAwareTrait;
 use Nip\Cookie\Jar as CookieJar;
 use Nip\Database\Manager as DatabaseManager;
-use Nip\Debug\Debug;
-use Nip\Debug\ErrorHandler;
-use Nip\DebugBar\DataCollector\RouteCollector;
-use Nip\DebugBar\StandardDebugBar;
 use Nip\Dispatcher\DispatcherAwareTrait;
-use Nip\Dispatcher\DispatcherServiceProvider;
-use Nip\Filesystem\FilesystemServiceProvider;
 use Nip\Http\Response\Response;
-use Nip\Http\Response\ResponseFactory;
-use Nip\Locale\LocaleServiceProvider;
-use Nip\Logger\Manager as LoggerManager;
-use Nip\Mail\MailServiceProvider;
-use Nip\Mvc\MvcServiceProvider;
 use Nip\Request;
 use Nip\Router\RouterAwareTrait;
-use Nip\Router\RouterServiceProvider;
 use Nip\Session;
 use Nip\Staging\StagingAwareTrait;
-use Nip\Staging\StagingServiceProvider;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Whoops\Handler\PrettyPageHandler;
-use Whoops\Run as WhoopsRun;
 
 /**
  * Class Application.
@@ -45,6 +30,7 @@ class Application
 {
     use ContainerAliasBindingsTrait;
     use CoreBootstrapersTrait;
+    use ServiceProviderAwareTrait;
     use ConfigAwareTrait;
     use AutoLoaderAwareTrait;
     use RouterAwareTrait;
@@ -54,6 +40,8 @@ class Application
     use HasTranslationTrait;
     use HasLoggerTrait;
     use HasRoutingTrait;
+
+    use DeprecatedRegisterServices;
 
     /**
      * Indicates if the application has "booted".
@@ -95,7 +83,6 @@ class Application
         $this->includeVendorAutoload();
         $this->bootstrap();
 
-        $this->registerServices();
         $this->setupRequest();
         $this->setupErrorHandling();
         $this->setupURLConstants();
@@ -103,18 +90,6 @@ class Application
 
     public function includeVendorAutoload()
     {
-    }
-
-    public function registerServices()
-    {
-        $this->getContainer()->addServiceProvider(AutoLoaderServiceProvider::class);
-        $this->getContainer()->addServiceProvider(MailServiceProvider::class);
-        $this->getContainer()->addServiceProvider(MvcServiceProvider::class);
-        $this->getContainer()->addServiceProvider(DispatcherServiceProvider::class);
-        $this->getContainer()->addServiceProvider(StagingServiceProvider::class);
-        $this->getContainer()->addServiceProvider(RouterServiceProvider::class);
-        $this->getContainer()->addServiceProvider(FilesystemServiceProvider::class);
-        $this->getContainer()->addServiceProvider(LocaleServiceProvider::class);
     }
 
     public function setupRequest()
@@ -351,9 +326,9 @@ class Application
      * @param string $message
      * @param array $headers
      *
+     * @return void
      * @throws HttpException
      *
-     * @return void
      */
     public function abort($code, $message = '', array $headers = [])
     {

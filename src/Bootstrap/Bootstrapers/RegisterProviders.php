@@ -19,6 +19,6 @@ class RegisterProviders extends AbstractBootstraper
     public function bootstrap(Application $app)
     {
         $app->registerServices();
-//        $app->registerConfiguredProviders();
+        $app->registerConfiguredProviders();
     }
 }
