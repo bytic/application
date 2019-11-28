@@ -4,6 +4,8 @@ namespace Nip\Application;
 
 use Exception;
 use Nip\Application\Bootstrap\CoreBootstrapersTrait;
+use Nip\Application\Traits\BindPathsTrait;
+use Nip\Application\Traits\EnviromentConfiguration;
 use Nip\Application\Traits\HasLoggerTrait;
 use Nip\Application\Traits\HasRoutingTrait;
 use Nip\Application\Traits\HasTranslationTrait;
@@ -47,6 +49,8 @@ class Application
     use CoreBootstrapersTrait;
     use ConfigAwareTrait;
     use AutoLoaderAwareTrait;
+    use BindPathsTrait;
+    use EnviromentConfiguration;
     use RouterAwareTrait;
     use DispatcherAwareTrait;
     use StagingAwareTrait;
@@ -342,6 +346,17 @@ class Application
      */
     public function terminate(Request $request, Response $response)
     {
+    }
+
+    /**
+     * Determine if the application configuration is cached.
+     *
+     * @return bool
+     */
+    public function configurationIsCached()
+    {
+        return false;
+//        return file_exists($this->getCachedConfigPath());
     }
 
     /**

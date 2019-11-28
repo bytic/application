@@ -13,7 +13,7 @@ trait BindPathsTrait
      *
      * @var string
      */
-    protected $basePath;
+    protected $basePath = null;
 
     /**
      * The custom database path defined by the developer.
@@ -73,7 +73,7 @@ trait BindPathsTrait
      */
     public function path()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'application';
+        return $this->basePath() . DIRECTORY_SEPARATOR . 'application';
     }
 
     /**
@@ -83,7 +83,20 @@ trait BindPathsTrait
      */
     public function basePath()
     {
+        if ($this->basePath === null) {
+            $this->initBasePath();
+        }
         return $this->basePath;
+    }
+
+    protected function initBasePath()
+    {
+        if (defined('ROOT_PATH')) {
+            $this->setBasePath(ROOT_PATH);
+            return;
+        }
+
+        $this->setBasePath('');
     }
 
     /**
