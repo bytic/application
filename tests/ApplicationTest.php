@@ -21,6 +21,7 @@ class ApplicationTest extends AbstractTest
     public function testRegisterServices()
     {
         $application = new Application();
+        $application->initContainer();
         $application->registerServices();
 //
 //        static::assertInstanceOf(Mailer::class, $this->application->getContainer()->get('mailer'));
