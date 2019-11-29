@@ -33,14 +33,14 @@ class Application
     use ContainerAliasBindingsTrait;
     use CoreBootstrapersTrait;
     use ServiceProviderAwareTrait;
-    use ConfigAwareTrait;
-    use AutoLoaderAwareTrait;
     use BindPathsTrait;
     use EnviromentConfiguration;
+    use AutoLoaderAwareTrait;
     use RouterAwareTrait;
     use DispatcherAwareTrait;
     use StagingAwareTrait;
 
+    use ConfigAwareTrait;
     use HasTranslationTrait;
     use HasLoggerTrait;
     use HasRoutingTrait;

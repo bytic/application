@@ -116,7 +116,7 @@ trait BindPathsTrait
      */
     public function resourcePath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'resources';
+        return $this->basePath() . DIRECTORY_SEPARATOR . 'resources';
     }
 
     /**
@@ -126,7 +126,7 @@ trait BindPathsTrait
      */
     public function configPath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'config';
+        return $this->basePath() . DIRECTORY_SEPARATOR . 'config';
     }
 
     /**
@@ -136,7 +136,7 @@ trait BindPathsTrait
      */
     public function publicPath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'public';
+        return $this->basePath() . DIRECTORY_SEPARATOR . 'public';
     }
 
     /**
@@ -146,7 +146,7 @@ trait BindPathsTrait
      */
     public function storagePath()
     {
-        return $this->storagePath ?: $this->basePath . DIRECTORY_SEPARATOR . 'storage';
+        return $this->storagePath ?: $this->basePath() . DIRECTORY_SEPARATOR . 'storage';
     }
 
     /**
@@ -156,7 +156,7 @@ trait BindPathsTrait
      */
     public function databasePath()
     {
-        return $this->databasePath ?: $this->basePath . DIRECTORY_SEPARATOR . 'database';
+        return $this->databasePath ?: $this->basePath() . DIRECTORY_SEPARATOR . 'database';
     }
 
     /**
@@ -166,6 +166,6 @@ trait BindPathsTrait
      */
     public function bootstrapPath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'bootstrap';
+        return $this->basePath() . DIRECTORY_SEPARATOR . 'bootstrap';
     }
 }
