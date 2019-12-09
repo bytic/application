@@ -23,6 +23,6 @@ class EnviromentConfigurationTest extends AbstractTest
     public function testEnvironmentFilePath()
     {
         $application = new Application();
-        self::assertSame('/.env', $application->environmentFilePath());
+        self::assertSame($application->basePath() . '/.env', $application->environmentFilePath());
     }
 }
