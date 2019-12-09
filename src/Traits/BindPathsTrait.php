@@ -55,15 +55,15 @@ trait BindPathsTrait
      */
     public function bindPathsInContainer()
     {
-        $this->share('path', $this->path());
-        $this->share('path.base', $this->basePath());
-        $this->share('path.lang', $this->langPath());
-        $this->share('path.config', $this->configPath());
-        $this->share('path.public', $this->publicPath());
-        $this->share('path.storage', $this->storagePath());
-        $this->share('path.database', $this->databasePath());
-        $this->share('path.resources', $this->resourcePath());
-        $this->share('path.bootstrap', $this->bootstrapPath());
+        $this->set('path', $this->path());
+        $this->set('path.base', $this->basePath());
+        $this->set('path.lang', $this->langPath());
+        $this->set('path.config', $this->configPath());
+        $this->set('path.public', $this->publicPath());
+        $this->set('path.storage', $this->storagePath());
+        $this->set('path.database', $this->databasePath());
+        $this->set('path.resources', $this->resourcePath());
+        $this->set('path.bootstrap', $this->bootstrapPath());
     }
 
     /**

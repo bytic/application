@@ -22,7 +22,7 @@ trait EnviromentConfiguration
      */
     public function environmentPath()
     {
-        return $this->environmentPath ?: $this->basePath;
+        return $this->environmentPath ?: $this->basePath();
     }
 
     /**

@@ -17,4 +17,12 @@ class BindPathsTraitTest extends AbstractTest
         $application = new Application();
         self::assertSame(TEST_FIXTURE_PATH, $application->basePath());
     }
+
+    public function test_bindPathsInContainer()
+    {
+        $application = new Application();
+        $application->bindPathsInContainer();
+        self::assertSame($application->basePath(), $application->getContainer()->get('path.base'));
+        self::assertSame($application->basePath() . '\bootstrap', $application->getContainer()->get('path.bootstrap'));
+    }
 }
