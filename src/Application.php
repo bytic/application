@@ -4,18 +4,19 @@ namespace Nip\Application;
 
 use Exception;
 use Nip\Application\Bootstrap\CoreBootstrapersTrait;
-use Nip\Application\Traits\DeprecatedRegisterServices;
 use Nip\Application\Traits\BindPathsTrait;
+use Nip\Application\Traits\DeprecatedRegisterServices;
 use Nip\Application\Traits\EnviromentConfiguration;
+use Nip\Application\Traits\HasDatabase;
 use Nip\Application\Traits\HasLoggerTrait;
 use Nip\Application\Traits\HasRoutingTrait;
 use Nip\Application\Traits\HasTranslationTrait;
+use Nip\Application\Traits\ServiceProviderAwareTrait;
 use Nip\AutoLoader\AutoLoaderAwareTrait;
+use Nip\Config\Config;
 use Nip\Config\ConfigAwareTrait;
 use Nip\Container\ContainerAliasBindingsTrait;
-use Nip\Application\Traits\ServiceProviderAwareTrait;
 use Nip\Cookie\Jar as CookieJar;
-use Nip\Database\Manager as DatabaseManager;
 use Nip\Dispatcher\DispatcherAwareTrait;
 use Nip\Http\Response\Response;
 use Nip\Request;
@@ -44,7 +45,7 @@ class Application
     use HasTranslationTrait;
     use HasLoggerTrait;
     use HasRoutingTrait;
-
+    use HasDatabase;
     use DeprecatedRegisterServices;
 
     /**
@@ -152,21 +153,6 @@ class Application
     public function setupConfig()
     {
         $this->registerContainerConfig();
-    }
-
-    public function setupDatabase()
-    {
-        $stageConfig = $this->getStaging()->getStage()->getConfig();
-        $dbManager = new DatabaseManager();
-        $dbManager->setBootstrap($this);
-
-        $connection = $dbManager->newConnectionFromConfig($stageConfig->get('DB'));
-        $this->getContainer()->set('db.connection', $connection);
-
-        if ($this->getDebugBar()->isEnabled()) {
-            $adapter = $connection->getAdapter();
-            $this->getDebugBar()->initDatabaseAdapter($adapter);
-        }
     }
 
     public function setupSession()

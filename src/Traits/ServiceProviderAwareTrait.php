@@ -3,6 +3,7 @@
 namespace Nip\Application\Traits;
 
 use Nip\AutoLoader\AutoLoaderServiceProvider;
+use Nip\Database\DatabaseServiceProvider;
 use Nip\Dispatcher\DispatcherServiceProvider;
 use Nip\Filesystem\FilesystemServiceProvider;
 use Nip\Locale\LocaleServiceProvider;
@@ -36,7 +37,7 @@ trait ServiceProviderAwareTrait
             StagingServiceProvider::class,
             RouterServiceProvider::class,
             RoutesServiceProvider::class,
-//            DatabaseServiceProvider::class,
+            DatabaseServiceProvider::class,
 //            TranslatorServiceProvider::class,
 //            FlashServiceProvider::class,
             FilesystemServiceProvider::class,
