@@ -26,7 +26,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Class Application.
  */
-class Application
+class Application implements ApplicationInterface
 {
     use Traits\BindPathsTrait;
     use Traits\CanBootTrait;

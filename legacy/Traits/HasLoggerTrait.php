@@ -31,8 +31,8 @@ trait HasLoggerTrait
 
         if ($this->getStaging()->getStage()->inTesting()) {
             Debug::enable(E_ALL, true);
-            $this->getDebugBar()->enable();
-            $this->getDebugBar()->addMonolog($this->getLogger()->getMonolog());
+//            $this->getDebugBar()->enable();
+//            $this->getDebugBar()->addMonolog($this->getLogger()->getMonolog());
         } else {
             Debug::enable(E_ALL & ~E_NOTICE, false);
         }
@@ -87,34 +87,28 @@ trait HasLoggerTrait
      */
     public function getDebugBar()
     {
-        if ($this->debugBar == null) {
-            $this->initDebugBar();
-        }
-
-        return $this->debugBar;
+        return app('debugbar');
     }
 
     /**
-     * @param null $debugBar
+     * @deprecated use app('debugbar')
      */
     public function setDebugBar($debugBar)
     {
-        $this->debugBar = $debugBar;
-    }
-
-    public function initDebugBar()
-    {
-        $this->setDebugBar($this->newDebugBar());
     }
 
     /**
-     * @return StandardDebugBar
+     * @deprecated use app('debugbar')
+     */
+    public function initDebugBar()
+    {
+    }
+
+    /**
+     * @deprecated use app('debugbar')
      */
     public function newDebugBar()
     {
-        $debugBar = new StandardDebugBar();
-
-        return $debugBar;
     }
 
 
