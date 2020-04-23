@@ -28,8 +28,8 @@
   "require": {
     "php": "^7.1",
     "bytic/autoloader": "^0.9",
-    "bytic/container": "^0.9",
-    "bytic/config": "^0.9",
+    "bytic/container": "^0.9|^1.0",
+    "bytic/config": "^0.9|^1.0",
     "bytic/database": "^0.9",
     "bytic/debug": "^0.9",
     "bytic/debugbar": "^0.9",

@@ -12,6 +12,10 @@ use Nip\Http\Response\ResponseFactory;
 use Nip\Request;
 use Whoops\Handler\PrettyPageHandler;
 
+/**
+ * Trait HasLoggerTrait
+ * @package Nip\Application\Traits
+ */
 trait HasLoggerTrait
 {
     /**

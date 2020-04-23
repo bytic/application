@@ -4,14 +4,11 @@ namespace Nip\Application;
 
 use Exception;
 use Nip\Application\Bootstrap\CoreBootstrapersTrait;
-use Nip\Application\Traits\BindPathsTrait;
 use Nip\Application\Traits\DeprecatedRegisterServices;
-use Nip\Application\Traits\EnviromentConfiguration;
 use Nip\Application\Traits\HasDatabase;
 use Nip\Application\Traits\HasLoggerTrait;
 use Nip\Application\Traits\HasRoutingTrait;
 use Nip\Application\Traits\HasTranslationTrait;
-use Nip\Application\Traits\ServiceProviderAwareTrait;
 use Nip\AutoLoader\AutoLoaderAwareTrait;
 use Nip\Config\Config;
 use Nip\Config\ConfigAwareTrait;
@@ -31,11 +28,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class Application
 {
+    use Traits\BindPathsTrait;
+    use Traits\CanBootTrait;
+    use Traits\EnviromentConfiguration;
+    use Traits\ServiceProviderAwareTrait;
+
     use ContainerAliasBindingsTrait;
     use CoreBootstrapersTrait;
-    use ServiceProviderAwareTrait;
-    use BindPathsTrait;
-    use EnviromentConfiguration;
     use AutoLoaderAwareTrait;
     use RouterAwareTrait;
     use DispatcherAwareTrait;
@@ -47,13 +46,6 @@ class Application
     use HasRoutingTrait;
     use HasDatabase;
     use DeprecatedRegisterServices;
-
-    /**
-     * Indicates if the application has "booted".
-     *
-     * @var bool
-     */
-    protected $booted = false;
 
     /**
      * @var null|Request
@@ -203,25 +195,6 @@ class Application
 
     public function setupLocale()
     {
-    }
-
-    public function boot()
-    {
-        if ($this->isBooted()) {
-            return;
-        }
-
-        $this->getContainer()->getProviders()->boot();
-    }
-
-    /**
-     * Determine if the application has booted.
-     *
-     * @return bool
-     */
-    public function isBooted()
-    {
-        return $this->booted;
     }
 
     /**
