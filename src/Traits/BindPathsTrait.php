@@ -8,13 +8,12 @@ namespace Nip\Application\Traits;
  */
 trait BindPathsTrait
 {
-
     /**
      * The base path for the Laravel installation.
      *
      * @var string
      */
-    protected $basePath;
+    protected $basePath = null;
 
     /**
      * The custom database path defined by the developer.
@@ -40,7 +39,7 @@ trait BindPathsTrait
     /**
      * Set the base path for the application.
      *
-     * @param  string $basePath
+     * @param string $basePath
      * @return $this
      */
     public function setBasePath($basePath)
@@ -56,15 +55,15 @@ trait BindPathsTrait
      */
     public function bindPathsInContainer()
     {
-        $this->share('path', $this->path());
-        $this->share('path.base', $this->basePath());
-        $this->share('path.lang', $this->langPath());
-        $this->share('path.config', $this->configPath());
-        $this->share('path.public', $this->publicPath());
-        $this->share('path.storage', $this->storagePath());
-        $this->share('path.database', $this->databasePath());
-        $this->share('path.resources', $this->resourcePath());
-        $this->share('path.bootstrap', $this->bootstrapPath());
+        $this->set('path', $this->path());
+        $this->set('path.base', $this->basePath());
+        $this->set('path.lang', $this->langPath());
+        $this->set('path.config', $this->configPath());
+        $this->set('path.public', $this->publicPath());
+        $this->set('path.storage', $this->storagePath());
+        $this->set('path.database', $this->databasePath());
+        $this->set('path.resources', $this->resourcePath());
+        $this->set('path.bootstrap', $this->bootstrapPath());
     }
 
     /**
@@ -74,7 +73,7 @@ trait BindPathsTrait
      */
     public function path()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'application';
+        return $this->basePath() . DIRECTORY_SEPARATOR . 'application';
     }
 
     /**
@@ -84,7 +83,20 @@ trait BindPathsTrait
      */
     public function basePath()
     {
+        if ($this->basePath === null) {
+            $this->initBasePath();
+        }
         return $this->basePath;
+    }
+
+    protected function initBasePath()
+    {
+        if (defined('ROOT_PATH')) {
+            $this->setBasePath(ROOT_PATH);
+            return;
+        }
+
+        $this->setBasePath('');
     }
 
     /**
@@ -104,7 +116,7 @@ trait BindPathsTrait
      */
     public function resourcePath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'resources';
+        return $this->basePath() . DIRECTORY_SEPARATOR . 'resources';
     }
 
     /**
@@ -114,7 +126,7 @@ trait BindPathsTrait
      */
     public function configPath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'config';
+        return $this->basePath() . DIRECTORY_SEPARATOR . 'config';
     }
 
     /**
@@ -124,7 +136,7 @@ trait BindPathsTrait
      */
     public function publicPath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'public';
+        return $this->basePath() . DIRECTORY_SEPARATOR . 'public';
     }
 
     /**
@@ -134,7 +146,7 @@ trait BindPathsTrait
      */
     public function storagePath()
     {
-        return $this->storagePath ?: $this->basePath . DIRECTORY_SEPARATOR . 'storage';
+        return $this->storagePath ?: $this->basePath() . DIRECTORY_SEPARATOR . 'storage';
     }
 
     /**
@@ -144,7 +156,7 @@ trait BindPathsTrait
      */
     public function databasePath()
     {
-        return $this->databasePath ?: $this->basePath . DIRECTORY_SEPARATOR . 'database';
+        return $this->databasePath ?: $this->basePath() . DIRECTORY_SEPARATOR . 'database';
     }
 
     /**
@@ -154,6 +166,6 @@ trait BindPathsTrait
      */
     public function bootstrapPath()
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . 'bootstrap';
+        return $this->basePath() . DIRECTORY_SEPARATOR . 'bootstrap';
     }
 }

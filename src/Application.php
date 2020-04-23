@@ -3,12 +3,8 @@
 namespace Nip\Application;
 
 use Nip\Application\Bootstrap\CoreBootstrapersTrait;
-use Nip\Application\Traits\BindPathsTrait;
-use Nip\Application\Traits\EnviromentConfiguration;
-use Nip\Application\Traits\HasLocaleTrait;
 use Nip\AutoLoader\AutoLoaderAwareTrait;
 use Nip\Container\ContainerAliasBindingsTrait;
-use Nip\Container\ServiceProviders\ServiceProviderAwareTrait;
 use Nip\Dispatcher\DispatcherAwareTrait;
 use Nip\Http\Response\Response;
 use Nip\Request;
@@ -23,16 +19,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class Application implements ApplicationInterface
 {
+    use Traits\BindPathsTrait;
+    use Traits\CanBootTrait;
+    use Traits\EnviromentConfiguration;
+    use Traits\HasLocaleTrait;
+    use Traits\ServiceProviderAwareTrait;
+
     use ContainerAliasBindingsTrait;
     use CoreBootstrapersTrait;
-    use ServiceProviderAwareTrait;
-    use BindPathsTrait;
-    use EnviromentConfiguration;
     use AutoLoaderAwareTrait;
     use RouterAwareTrait;
     use DispatcherAwareTrait;
     use StagingAwareTrait;
-    use HasLocaleTrait;
 
     /**
      * The ByTIC framework version.
@@ -69,26 +67,6 @@ class Application implements ApplicationInterface
     {
     }
 
-    public function boot()
-    {
-        if ($this->isBooted()) {
-            return;
-        }
-
-        $this->bootProviders();
-        $this->booted = true;
-    }
-
-    /**
-     * Determine if the application has booted.
-     *
-     * @return bool
-     */
-    public function isBooted()
-    {
-        return $this->booted;
-    }
-
     /** @noinspection PhpUnusedParameterInspection
      *
      * @param Request $request
@@ -118,11 +96,12 @@ class Application implements ApplicationInterface
     /**
      * Throw an HttpException with the given data.
      *
-     * @param  int $code
-     * @param  string $message
-     * @param  array $headers
+     * @param int $code
+     * @param string $message
+     * @param array $headers
      * @return void
      *
+     * @return void
      * @throws HttpException
      */
     public function abort($code, $message = '', array $headers = [])

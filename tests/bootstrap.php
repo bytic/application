@@ -11,5 +11,6 @@ define('TEST_FIXTURE_PATH', __DIR__.DIRECTORY_SEPARATOR.'fixtures');
 
 $container = new Container();
 $container->set('inflector', new Inflector());
+$container->set('config', new \Nip\Config\Config());
 
 Container::setInstance($container);
