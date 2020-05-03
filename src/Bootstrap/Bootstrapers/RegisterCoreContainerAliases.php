@@ -25,6 +25,7 @@ class RegisterCoreContainerAliases extends AbstractBootstraper
         /** @var Container $container */
         $container = $app->getContainer();
 
+        $container->share('kernel', $app);
         $container->share('app', $app);
         $container->alias('app', Application::class);
         $container->alias('app', ApplicationInterface::class);
@@ -35,7 +36,6 @@ class RegisterCoreContainerAliases extends AbstractBootstraper
             return $container->get(Kernel::class);
         });
         $container->alias('kernel.http', KernelInterface::class);
-
 //        $container->alias('router', Router::class);
 //        $container->alias('dispatcher', Dispatcher::class);
     }

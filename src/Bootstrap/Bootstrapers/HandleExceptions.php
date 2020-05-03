@@ -4,6 +4,8 @@ namespace Nip\Application\Bootstrap\Bootstrapers;
 
 use Nip\Application\Application;
 use Nip\Debug\Debug;
+use Nip\Debug\ErrorHandler;
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
 /**
  * Class HandleExceptions
@@ -21,20 +23,13 @@ class HandleExceptions extends AbstractBootstraper
     {
         $this->setApp($app);
 
-        error_reporting(-1);
-
         if (config('app.debug')) {
-            Debug::enable(E_ALL, true);
+            Debug::enable();
         } else {
-            Debug::enable(E_ALL & ~E_NOTICE, false);
         }
 
-//        $handler = set_error_handler('var_dump');
-//        $handler = is_array($handler) ? $handler[0] : null;
-//        restore_error_handler();
-//
-//        if ($handler instanceof ErrorHandler) {
-//            $app->getContainer()->share(ErrorHandler::class, $handler);
-//        }
+        $handler = ErrorHandler::register(null, false);
+        $app->getContainer()->set(ErrorHandler::class, $handler);
+        $handler->throwAt(E_ALL & ~(E_STRICT|E_NOTICE|E_WARNING|E_USER_WARNING), true);
     }
 }

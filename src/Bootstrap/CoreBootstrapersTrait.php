@@ -2,7 +2,6 @@
 
 namespace Nip\Application\Bootstrap;
 
-use Nip\Application\Bootstrap\Bootstrapers\AbstractBootstraper;
 use Nip\Application\Bootstrap\Bootstrapers\BootProviders;
 use Nip\Application\Bootstrap\Bootstrapers\HandleExceptions;
 use Nip\Application\Bootstrap\Bootstrapers\LoadConfiguration;
@@ -22,7 +21,7 @@ trait CoreBootstrapersTrait
     use BootstrapAwareTrait;
 
     /**
-     * @return AbstractBootstraper[]
+     * @return string[]
      */
     protected function getDefaultBootstrappers()
     {
