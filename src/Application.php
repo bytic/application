@@ -10,7 +10,6 @@ use Nip\Application\Traits\HasLoggerTrait;
 use Nip\Application\Traits\HasRoutingTrait;
 use Nip\Application\Traits\HasTranslationTrait;
 use Nip\AutoLoader\AutoLoaderAwareTrait;
-use Nip\Config\Config;
 use Nip\Config\ConfigAwareTrait;
 use Nip\Container\ContainerAliasBindingsTrait;
 use Nip\Cookie\Jar as CookieJar;
