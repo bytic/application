@@ -2,71 +2,22 @@
 
 namespace Nip\Application\Traits;
 
+use ByTIC\Dotenv\HasEnv\HasEnviroment;
+
 /**
  * Class EnviromentConfiguration
  * @package Nip\Application\Traits
  */
 trait EnviromentConfiguration
 {
-    /**
-     * The environment file to load during bootstrapping.
-     *
-     * @var string
-     */
-    protected $environmentFile = '.env';
+    use HasEnviroment;
 
     /**
-     * Get the path to the environment file directory.
-     *
-     * @return string
+     * @inheritDoc
      */
-    public function environmentPath()
+    public function environmentPathGeneric()
     {
-        return $this->environmentPath ?: $this->basePath();
-    }
-
-    /**
-     * Set the directory for the environment file.
-     *
-     * @param  string $path
-     * @return $this
-     */
-    public function useEnvironmentPath($path)
-    {
-        $this->environmentPath = $path;
-        return $this;
-    }
-
-    /**
-     * Set the environment file to be loaded during bootstrapping.
-     *
-     * @param  string $file
-     * @return $this
-     */
-    public function loadEnvironmentFrom($file)
-    {
-        $this->environmentFile = $file;
-        return $this;
-    }
-
-    /**
-     * Get the environment file the application is using.
-     *
-     * @return string
-     */
-    public function environmentFile()
-    {
-        return $this->environmentFile ?: '.env';
-    }
-
-    /**
-     * Get the fully qualified path to the environment file.
-     *
-     * @return string
-     */
-    public function environmentFilePath()
-    {
-        return $this->environmentPath() . '/' . $this->environmentFile();
+        return $this->basePath();
     }
 
     /**

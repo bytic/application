@@ -28,6 +28,7 @@
   "require": {
     "php": "^7.1",
     "bytic/autoloader": "^1.0",
+    "bytic/dotenv": "^4.0",
     "bytic/container": "^0.9|^1.0",
     "bytic/config": "^0.9|^1.0",
     "bytic/database": "^1.0",
@@ -42,8 +43,7 @@
     "bytic/router": "^1.0",
     "bytic/staging": "^1.0",
     "bytic/translation": "^1.0",
-    "filp/whoops": "^2.3",
-    "vlucas/phpdotenv": "^2.4"
+    "filp/whoops": "^2.3"
   },
   "require-dev": {
     "phpunit/phpunit": "^6.5|^7.2",

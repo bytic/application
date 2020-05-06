@@ -20,6 +20,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class Application implements ApplicationInterface
 {
     use Traits\BindPathsTrait;
+    use Traits\CacheBootstrapTrait;
     use Traits\CanBootTrait;
     use Traits\EnviromentConfiguration;
     use Traits\HasLocaleTrait;
