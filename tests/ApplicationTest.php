@@ -2,11 +2,10 @@
 
 namespace Nip\Application\Tests;
 
+use Mockery\Mock;
 use Nip\Application\Application;
-use Nip\Dispatcher\Dispatcher;
-use Nip\Mail\Mailer;
-use Nip\Mvc\Modules;
 use Nip\Router\Router;
+use Nip\Router\RouterServiceProvider;
 
 /**
  * Class ApplicationTest.
@@ -18,24 +17,26 @@ class ApplicationTest extends AbstractTest
      */
     protected $application;
 
-    public function testRegisterServices()
+    public function test_getGenericProviders()
     {
         $application = new Application();
         $application->initContainer();
-        $application->registerServices();
-//
-//        static::assertInstanceOf(Mailer::class, $this->application->getContainer()->get('mailer'));
-//        static::assertInstanceOf(Modules::class, $this->application->getContainer()->get('mvc.modules'));
-//        static::assertInstanceOf(Dispatcher::class, $this->application->getContainer()->get('dispatcher'));
-        static::assertInstanceOf(Router::class, $application->getContainer()->get('router'));
+        $providers = $application->getGenericProviders();
+
+        self::assertIsArray($providers);
+        self::assertCount(0, $providers);
     }
 
-//    public function testBootstrap()
-//    {
-//        $application = new Application();
-//        $application->bootstrap();
-//
-//        self::assertTrue($application->hasBeenBootstrapped());
-//    }
+    public function testRegisterServices()
+    {
+        /** @var Mock|Application $application */
+        $application = \Mockery::mock(Application::class)->shouldAllowMockingProtectedMethods()->makePartial();
+        $application->shouldReceive('getConfiguredProviders')->andReturn([RouterServiceProvider::class]);
+
+        $application->initContainer();
+        $application->registerConfiguredProviders();
+
+        static::assertInstanceOf(Router::class, $application->getContainer()->get('router'));
+    }
 
 }

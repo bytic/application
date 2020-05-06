@@ -30,13 +30,6 @@ trait BindPathsTrait
     protected $storagePath;
 
     /**
-     * The custom environment path defined by the developer.
-     *
-     * @var string
-     */
-    protected $environmentPath;
-
-    /**
      * Set the base path for the application.
      *
      * @param string $basePath
@@ -162,10 +155,11 @@ trait BindPathsTrait
     /**
      * Get the path to the bootstrap directory.
      *
+     * @param  string  $path Optionally, a path to append to the bootstrap path
      * @return string
      */
-    public function bootstrapPath()
+    public function bootstrapPath($path = '')
     {
-        return $this->basePath() . DIRECTORY_SEPARATOR . 'bootstrap';
+        return $this->basePath() . DIRECTORY_SEPARATOR . 'bootstrap'.($path ? DIRECTORY_SEPARATOR.$path : $path);
     }
 }

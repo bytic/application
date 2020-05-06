@@ -26,19 +26,19 @@ class LoadConfiguration extends AbstractBootstraper
         // First we will see if we have a cache configuration file. If we do, we'll load
         // the configuration items from that file so that it is very quick. Otherwise
         // we will need to spin through every configuration file and load them all.
-//        if (file_exists($cached = $app->getCachedConfigPath())) {
-//            $items = require $cached;
-//            $loadedFromCache = true;
-//        }
+        if (file_exists($cached = $app->getCachedConfigPath())) {
+            $items = require $cached;
+            $loadedFromCache = true;
+        }
 
         // Next we will spin through all of the configuration files in the configuration
         // directory and load each one into the repository. This will make all of the
         // options available to the developer for use in various parts of this app.
         $app->share('config', $config = new Config($items, true));
 
-//        if (!isset($loadedFromCache)) {
-        $this->loadConfigurationFiles($app, $config);
-//        }
+        if (!isset($loadedFromCache)) {
+            $this->loadConfigurationFiles($app, $config);
+        }
         // Finally, we will set the application's environment based on the configuration
         // values that were loaded. We will pass a callback which will be used to get
         // the environment in a web context where an "--env" switch is not present.
@@ -75,6 +75,8 @@ class LoadConfiguration extends AbstractBootstraper
         foreach (Finder::create()->files()->name('*.php')->in($configPath) as $file) {
             $files[basename($file->getRealPath(), '.php')] = $file->getRealPath();
         }
+
+        ksort($files, SORT_NATURAL);
 
         return $files;
     }
