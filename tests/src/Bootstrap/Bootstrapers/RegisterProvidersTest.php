@@ -5,7 +5,7 @@ namespace Nip\Application\Tests\Bootstrap\Bootstrapers;
 use Mockery\Mock;
 use Nip\Application\Bootstrap\Bootstrapers\RegisterProviders;
 use Nip\Application\Tests\AbstractTest;
-use Nip\Application\Tests\Fixtures\Application;
+use Nip\Application\Tests\Fixtures\Library\Application;
 use Nip\Router\Router;
 use Nip\Router\RouterServiceProvider;
 

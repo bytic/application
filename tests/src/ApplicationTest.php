@@ -12,15 +12,6 @@ use Nip\Router\RouterServiceProvider;
  */
 class ApplicationTest extends AbstractTest
 {
-    public function test_getGenericProviders()
-    {
-        $application = new Application();
-        $application->initContainer();
-        $providers = $application->getGenericProviders();
-
-        self::assertIsArray($providers);
-        self::assertCount(0, $providers);
-    }
 
     public function testRegisterServices()
     {

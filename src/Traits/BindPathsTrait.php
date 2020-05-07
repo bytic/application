@@ -84,12 +84,18 @@ trait BindPathsTrait
 
     protected function initBasePath()
     {
-        if (defined('ROOT_PATH')) {
-            $this->setBasePath(ROOT_PATH);
-            return;
-        }
+        $this->setBasePath($this->generateBasePath());
+    }
 
-        $this->setBasePath('');
+    /**
+     * @return string
+     */
+    protected function generateBasePath()
+    {
+        if (defined('ROOT_PATH')) {
+            return ROOT_PATH;
+        }
+        return '';
     }
 
     /**

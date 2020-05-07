@@ -84,17 +84,6 @@ class Application implements ApplicationInterface
     }
 
     /**
-     * Determine if the application configuration is cached.
-     *
-     * @return bool
-     */
-    public function configurationIsCached()
-    {
-        return false;
-//        return file_exists($this->getCachedConfigPath());
-    }
-
-    /**
      * Throw an HttpException with the given data.
      *
      * @param int $code
