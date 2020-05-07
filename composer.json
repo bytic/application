@@ -21,7 +21,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Nip\\Application\\Tests\\": "tests/",
+      "Nip\\Application\\Tests\\": "tests/src",
       "Nip\\Application\\Tests\\Fixtures\\": "tests/fixtures"
     }
   },
@@ -32,8 +32,8 @@
     "bytic/container": "^0.9|^1.0",
     "bytic/config": "^0.9|^1.0",
     "bytic/database": "^0.9",
-    "bytic/debug": "^0.9",
-    "bytic/debugbar": "^0.9",
+    "bytic/debug": "^0.9|^1.0",
+    "bytic/debugbar": "^0.9|^1.0",
     "bytic/dispatcher": "^0.9",
     "bytic/filesystem": "^0.9",
     "bytic/http": "^0.9",
@@ -42,10 +42,10 @@
     "bytic/mvc": "^0.9",
     "bytic/router": "^0.9",
     "bytic/staging": "^0.9",
-    "bytic/translation": "^0.9",
-    "filp/whoops": "^2.3"
+    "bytic/translation": "^0.9"
   },
   "require-dev": {
+    "filp/whoops": "^2.3",
     "phpunit/phpunit": "^6.5|^7.2",
     "mockery/mockery": "^1.0"
   }

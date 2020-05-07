@@ -1,6 +1,6 @@
 <?php
 
-namespace Nip\Application\Tests\Fixtures;
+namespace Nip\Application\Tests\Fixtures\Library;
 
 use Nip\Application as BaseApplication;
 
@@ -10,4 +10,11 @@ use Nip\Application as BaseApplication;
  */
 class LegacyApplication extends BaseApplication
 {
+    /**
+     * @return string
+     */
+    public function generateBasePath()
+    {
+        return TEST_FIXTURE_PATH;
+    }
 }
