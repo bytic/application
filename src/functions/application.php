@@ -19,3 +19,16 @@ if (!function_exists('app')) {
         return Container::getInstance()->get($make, $parameters);
     }
 }
+
+if (! function_exists('storage_path')) {
+    /**
+     * Get the path to the storage folder.
+     *
+     * @param  string  $path
+     * @return string
+     */
+    function storage_path($path = '')
+    {
+        return app('path.storage').($path ? DIRECTORY_SEPARATOR.$path : $path);
+    }
+}
