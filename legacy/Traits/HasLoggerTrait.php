@@ -15,6 +15,7 @@ use Whoops\Handler\PrettyPageHandler;
 /**
  * Trait HasLoggerTrait
  * @package Nip\Application\Traits
+ * @deprecated use container services
  */
 trait HasLoggerTrait
 {
@@ -28,17 +29,17 @@ trait HasLoggerTrait
     public function setupErrorHandling()
     {
         fix_input_quotes();
-
-        if ($this->getStaging()->getStage()->inTesting()) {
-            Debug::enable(E_ALL, true);
-//            $this->getDebugBar()->enable();
-//            $this->getDebugBar()->addMonolog($this->getLogger()->getMonolog());
-        } else {
-            Debug::enable(E_ALL & ~E_NOTICE, false);
-        }
-
-        $this->getLogger()->init();
-        $this->getContainer()->get(ErrorHandler::class)->setDefaultLogger($this->getLogger());
+//
+//        if ($this->getStaging()->getStage()->inTesting()) {
+//            Debug::enable(E_ALL, true);
+////            $this->getDebugBar()->enable();
+////            $this->getDebugBar()->addMonolog($this->getLogger()->getMonolog());
+//        } else {
+//            Debug::enable(E_ALL & ~E_NOTICE, false);
+//        }
+//
+//        $this->getLogger()->init();
+//        $this->getContainer()->get(ErrorHandler::class)->setDefaultLogger($this->getLogger());
     }
 
     /**
