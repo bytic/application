@@ -3,14 +3,14 @@
 namespace Nip\Application\Traits;
 
 use Exception;
-use Nip\Application\Application;
-use Nip\Debug\Debug;
-use Nip\Debug\ErrorHandler;
 use Nip\DebugBar\StandardDebugBar;
+use Nip\Http\Exceptions\Handler;
+use Nip\Http\Kernel\Traits\HandleExceptions;
 use Nip\Http\Response\Response;
-use Nip\Http\Response\ResponseFactory;
+use Nip\Logger\Logger;
 use Nip\Request;
-use Whoops\Handler\PrettyPageHandler;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Trait HasLoggerTrait
@@ -19,6 +19,8 @@ use Whoops\Handler\PrettyPageHandler;
  */
 trait HasLoggerTrait
 {
+    use HandleExceptions;
+
     /**
      * @var null|LoggerManager
      */
@@ -43,44 +45,11 @@ trait HasLoggerTrait
     }
 
     /**
-     * @return LoggerManager|null
+     * @return Logger|null
      */
     public function getLogger()
     {
-        if ($this->logger == null) {
-            $this->initLogger();
-        }
-
-        return $this->logger;
-    }
-
-    /**
-     * @param LoggerManager $logger
-     *
-     * @return $this
-     */
-    public function setLogger($logger)
-    {
-        $this->logger = $logger;
-
-        return $this;
-    }
-
-    public function initLogger()
-    {
-        $logger = $this->newLogger();
-        $logger->setBootstrap($this);
-        $this->setLogger($logger);
-    }
-
-    /**
-     * @return LoggerManager
-     */
-    public function newLogger()
-    {
-        $logger = new LoggerManager();
-
-        return $logger;
+        return app('log');
     }
 
     /**
@@ -110,53 +79,5 @@ trait HasLoggerTrait
      */
     public function newDebugBar()
     {
-    }
-
-
-    /**
-     * @param Exception $e
-     * @param Request $request
-     *
-     * @return Response
-     */
-    protected function handleException(Request $request, Exception $e)
-    {
-        $this->reportException($e);
-
-        return $this->renderException($request, $e);
-    }
-
-    /**
-     * Report the exception to the exception handler.
-     *
-     * @param Exception $e
-     *
-     * @return void
-     */
-    protected function reportException(Exception $e)
-    {
-        $this->getLogger()->error($e);
-    }
-
-    /**
-     * @param Request $request
-     * @param Exception $e
-     *
-     * @return Response
-     */
-    protected function renderException(Request $request, Exception $e)
-    {
-        if ($this->getStaging()->getStage()->isPublic()) {
-            $this->getDispatcher()->setErrorController();
-
-            return $this->getResponseFromRequest($request);
-        } else {
-            $whoops = new \Whoops\Run();
-            $whoops->allowQuit(false);
-            $whoops->writeToOutput(false);
-            $whoops->pushHandler(new PrettyPageHandler());
-
-            return ResponseFactory::make($whoops->handleException($e));
-        }
     }
 }
