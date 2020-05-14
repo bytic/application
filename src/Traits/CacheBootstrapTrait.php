@@ -27,4 +27,24 @@ trait CacheBootstrapTrait
     {
         return $this->bootstrapPath('cache/config.php');
     }
+
+    /**
+     * Determine if the application routes are cached.
+     *
+     * @return bool
+     */
+    public function routesAreCached()
+    {
+        return file_exists($this->getCachedRoutesPath());
+    }
+
+    /**
+     * Get the path to the routes cache folder
+     *
+     * @return string
+     */
+    public function getCachedRoutesPath()
+    {
+        return $this->bootstrapPath('cache/routes');
+    }
 }

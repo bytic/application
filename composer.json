@@ -27,26 +27,25 @@
   },
   "require": {
     "php": "^7.1",
-    "bytic/autoloader": "^1.0",
+    "bytic/autoloader": "^0.9|^1.0",
     "bytic/dotenv": "^4.0",
     "bytic/container": "^0.9|^1.0",
     "bytic/config": "^0.9|^1.0",
-    "bytic/database": "^1.0",
+    "bytic/database": "^0.9|^1.0",
     "bytic/debug": "^0.9|^1.0",
     "bytic/debugbar": "^0.9|^1.0",
-    "bytic/dispatcher": "^1.0",
-    "bytic/filesystem": "^1.0",
-    "bytic/http": "^1.0",
-    "bytic/locale": "^1.0",
-    "bytic/mail": "^1.0",
-    "bytic/mvc": "^1.0",
-    "bytic/router": "^1.0",
-    "bytic/staging": "^1.0",
-    "bytic/translation": "^1.0"
+    "bytic/dispatcher": "^0.9|^1.0",
+    "bytic/filesystem": "^0.9|^1.0",
+    "bytic/http": "^0.9|^1.0",
+    "bytic/locale": "^0.9|^1.0",
+    "bytic/mail": "^0.9|^1.0",
+    "bytic/mvc": "^0.9|^1.0",
+    "bytic/router": "^0.9|^1.0",
+    "bytic/staging": "^0.9|^1.0",
+    "bytic/translation": "^0.9|^1.0"
   },
   "require-dev": {
-    "filp/whoops": "^2.3",
-    "phpunit/phpunit": "^6.5|^7.2",
+    "phpunit/phpunit": "^7.2|^8.0|^9.0",
     "mockery/mockery": "^1.0"
   }
 }
