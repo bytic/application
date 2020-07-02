@@ -26,7 +26,6 @@
     }
   },
   "require": {
-    "php": "^7.1",
     "bytic/autoloader": "^0.9|^1.0",
     "bytic/dotenv": "^4.0",
     "bytic/container": "^0.9|^1.0",
