@@ -4,8 +4,6 @@ namespace Nip\Application\Bootstrap\Bootstrapers;
 
 use Nip\Application\Application;
 use Nip\Debug\Debug;
-use Nip\Debug\ErrorHandler;
-use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
 /**
  * Class HandleExceptions
@@ -28,7 +26,7 @@ class HandleExceptions extends AbstractBootstraper
         } else {
         }
 
-        $handler = $app->getContainer()->get(ErrorHandler::class);
-        $handler->throwAt(E_ALL & ~(E_STRICT|E_NOTICE|E_WARNING|E_USER_WARNING), true);
+        $handler = \Symfony\Component\ErrorHandler\ErrorHandler::register(null, false);
+        $handler->throwAt(E_ALL & ~(E_STRICT | E_NOTICE | E_WARNING | E_USER_WARNING), true);
     }
 }
