@@ -28,8 +28,7 @@ class HandleExceptions extends AbstractBootstraper
         } else {
         }
 
-        $handler = ErrorHandler::register(null, false);
-        $app->getContainer()->set(ErrorHandler::class, $handler);
+        $handler = $app->getContainer()->get(ErrorHandler::class);
         $handler->throwAt(E_ALL & ~(E_STRICT|E_NOTICE|E_WARNING|E_USER_WARNING), true);
     }
 }
