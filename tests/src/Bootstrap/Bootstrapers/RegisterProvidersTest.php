@@ -20,10 +20,12 @@ class RegisterProvidersTest extends AbstractTest
     {
         /** @var \Nip\Application\Application|Mock $application */
         $application = \Mockery::mock(Application::class)->makePartial();
-        $application->shouldReceive('bootProviders')->once();
+//        $application->shouldReceive('bootProviders')->once();
         $application->shouldReceive('getConfiguredProviders')->andReturn([RouterServiceProvider::class]);
 
         $application->initContainer();
+
+        $application->getContainer()->set('app', $application);
 
         $bootstrapper = new RegisterProviders();
         $bootstrapper->bootstrap($application);

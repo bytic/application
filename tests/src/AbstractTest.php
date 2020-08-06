@@ -14,6 +14,7 @@ abstract class AbstractTest extends TestCase
     public function tearDown(): void
     {
         parent::tearDown();
+        \Nip\Container\Container::setInstance(null);
         \Mockery::close();
     }
 }
