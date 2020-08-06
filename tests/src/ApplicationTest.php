@@ -20,6 +20,8 @@ class ApplicationTest extends AbstractTest
         $application->shouldReceive('getConfiguredProviders')->andReturn([RouterServiceProvider::class]);
 
         $application->initContainer();
+
+        $application->getContainer()->set('app', $application);
         $application->registerConfiguredProviders();
 
         static::assertInstanceOf(Router::class, $application->getContainer()->get('router'));

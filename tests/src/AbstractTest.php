@@ -10,4 +10,11 @@ use PHPUnit\Framework\TestCase;
 abstract class AbstractTest extends TestCase
 {
     protected $object;
+
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        \Nip\Container\Container::setInstance(null);
+        \Mockery::close();
+    }
 }
