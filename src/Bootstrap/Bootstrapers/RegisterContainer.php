@@ -18,6 +18,9 @@ class RegisterContainer extends AbstractBootstraper
      */
     public function bootstrap(Application $app)
     {
+        if ($app->hasContainer()) {
+            return;
+        }
         $app->initContainer();
     }
 }
