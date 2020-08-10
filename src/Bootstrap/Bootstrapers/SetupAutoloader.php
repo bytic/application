@@ -3,7 +3,6 @@
 namespace Nip\Application\Bootstrap\Bootstrapers;
 
 use Nip\Application\Application;
-use Nip\AutoLoader\AutoLoader;
 
 /**
  * Class SetupAutoloader
@@ -20,13 +19,13 @@ class SetupAutoloader extends AbstractBootstraper
      */
     public function bootstrap(Application $app)
     {
-        AutoLoader::registerHandler($app->getAutoLoader());
-
-        $app->setupAutoLoaderCache();
-        $app->setupAutoLoaderPaths();
-
-        if ($app->getStaging()->getStage()->inTesting()) {
-            $app->getAutoLoader()->getClassMapLoader()->setRetry(true);
-        }
+//        AutoLoader::registerHandler($app->getAutoLoader());
+//
+//        $app->setupAutoLoaderCache();
+//        $app->setupAutoLoaderPaths();
+//
+//        if ($app->getStaging()->getStage()->inTesting()) {
+//            $app->getAutoLoader()->getClassMapLoader()->setRetry(true);
+//        }
     }
 }

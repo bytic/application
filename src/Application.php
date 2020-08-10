@@ -9,7 +9,6 @@ use Nip\Application\Traits\HasDatabase;
 use Nip\Application\Traits\HasLoggerTrait;
 use Nip\Application\Traits\HasRoutingTrait;
 use Nip\Application\Traits\HasTranslationTrait;
-use Nip\AutoLoader\AutoLoaderAwareTrait;
 use Nip\Config\ConfigAwareTrait;
 use Nip\Container\ContainerAliasBindingsTrait;
 use Nip\Cookie\Jar as CookieJar;
@@ -35,7 +34,6 @@ class Application implements ApplicationInterface
 
     use ContainerAliasBindingsTrait;
     use CoreBootstrapersTrait;
-    use AutoLoaderAwareTrait;
     use RouterAwareTrait;
     use DispatcherAwareTrait;
     use StagingAwareTrait;
@@ -77,7 +75,6 @@ class Application implements ApplicationInterface
 
     public function prepare()
     {
-        $this->includeVendorAutoload();
         $this->bootstrap();
 
         $this->setupRequest();
@@ -85,19 +82,7 @@ class Application implements ApplicationInterface
         $this->setupURLConstants();
     }
 
-    public function includeVendorAutoload()
-    {
-    }
-
     public function setupRequest()
-    {
-    }
-
-    public function setupAutoLoaderCache()
-    {
-    }
-
-    public function setupAutoLoaderPaths()
     {
     }
 
