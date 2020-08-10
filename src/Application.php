@@ -4,6 +4,7 @@ namespace Nip\Application;
 
 use Exception;
 use Nip\Application\Bootstrap\CoreBootstrapersTrait;
+use Nip\Application\Traits\AutoLoaderAwareTrait;
 use Nip\Application\Traits\DeprecatedRegisterServices;
 use Nip\Application\Traits\HasDatabase;
 use Nip\Application\Traits\HasLoggerTrait;
@@ -40,8 +41,10 @@ class Application implements ApplicationInterface
 
     use ConfigAwareTrait;
     use HasTranslationTrait;
-    use HasLoggerTrait;
     use HasRoutingTrait;
+
+    use AutoLoaderAwareTrait;
+    use HasLoggerTrait;
     use HasDatabase;
     use DeprecatedRegisterServices;
 
