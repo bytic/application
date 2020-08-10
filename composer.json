@@ -26,7 +26,6 @@
     }
   },
   "require": {
-    "bytic/autoloader": "^0.9|^1.0",
     "bytic/dotenv": "^4.0",
     "bytic/container": "^0.9|^1.0",
     "bytic/config": "^0.9|^1.0",

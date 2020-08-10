@@ -3,7 +3,7 @@
 namespace Nip\Application;
 
 use Nip\Application\Bootstrap\CoreBootstrapersTrait;
-use Nip\AutoLoader\AutoLoaderAwareTrait;
+use Nip\Application\Traits\AutoLoaderAwareTrait;
 use Nip\Container\ContainerAliasBindingsTrait;
 use Nip\Dispatcher\DispatcherAwareTrait;
 use Nip\Http\Response\Response;
@@ -62,10 +62,6 @@ class Application implements ApplicationInterface
         if ($basePath) {
             $this->setBasePath($basePath);
         }
-    }
-
-    public function setupAutoLoaderPaths()
-    {
     }
 
     /** @noinspection PhpUnusedParameterInspection
