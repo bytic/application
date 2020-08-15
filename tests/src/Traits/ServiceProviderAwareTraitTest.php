@@ -11,7 +11,6 @@ use Nip\Application\Tests\AbstractTest;
  */
 class ServiceProviderAwareTraitTest extends AbstractTest
 {
-
     public function test_getGenericProviders()
     {
         $application = new Application();

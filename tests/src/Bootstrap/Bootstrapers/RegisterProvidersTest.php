@@ -15,7 +15,6 @@ use Nip\Router\RouterServiceProvider;
  */
 class RegisterProvidersTest extends AbstractTest
 {
-
     public function testRegisterConfiguredProvidersNoConfig()
     {
         /** @var \Nip\Application\Application|Mock $application */
@@ -32,5 +31,4 @@ class RegisterProvidersTest extends AbstractTest
 
         static::assertInstanceOf(Router::class, $application->getContainer()->get('router'));
     }
-
 }

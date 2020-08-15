@@ -12,7 +12,6 @@ use Nip\Database\DatabaseManager;
  */
 trait HasDatabase
 {
-
     public function setupDatabase()
     {
         $stageConfig = $this->getStaging()->getStage()->getConfig();
