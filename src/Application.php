@@ -10,8 +10,6 @@ use Nip\Http\Response\Response;
 use Nip\Request;
 use Nip\Router\RouterAwareTrait;
 use Nip\Staging\StagingAwareTrait;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class Application
@@ -24,6 +22,7 @@ class Application implements ApplicationInterface
     use Traits\CanBootTrait;
     use Traits\EnviromentConfiguration;
     use Traits\HasLocaleTrait;
+    use Traits\ExecutionTrait;
     use Traits\ServiceProviderAwareTrait;
 
     use ContainerAliasBindingsTrait;
@@ -75,29 +74,6 @@ class Application implements ApplicationInterface
         return $response;
     }
 
-    public function terminate()
-    {
-    }
-
-    /**
-     * Throw an HttpException with the given data.
-     *
-     * @param int $code
-     * @param string $message
-     * @param array $headers
-     * @return void
-     *
-     * @return void
-     * @throws HttpException
-     */
-    public function abort($code, $message = '', array $headers = [])
-    {
-        if ($code == 404) {
-            throw new NotFoundHttpException($message);
-        }
-        throw new HttpException($code, $message, null, $headers);
-    }
-
     /**
      * @return string
      */
@@ -112,13 +88,13 @@ class Application implements ApplicationInterface
      */
     protected function getResponseFromRequest($request)
     {
-        if ($request->hasMCA()) {
-            $response = $this->dispatchRequest($request);
-            ob_get_clean();
-
-            return $response;
+        if (!$request->hasMCA()) {
+            $this->abort(404, 'No MCA in Request');
         }
 
-        throw new NotFoundHttpException('No MCA in Request');
+        $response = $this->dispatchRequest($request);
+        ob_get_clean();
+
+        return $response;
     }
 }
