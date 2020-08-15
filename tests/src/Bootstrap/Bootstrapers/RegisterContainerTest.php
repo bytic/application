@@ -13,7 +13,6 @@ use Nip\Application\Tests\Fixtures\Library\LegacyApplication;
  */
 class RegisterContainerTest extends AbstractTest
 {
-
     public function testRegisterServices()
     {
         $application = new Application();
