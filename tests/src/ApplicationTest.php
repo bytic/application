@@ -40,5 +40,4 @@ class ApplicationTest extends AbstractTest
 
         static::assertInstanceOf(Router::class, $application->getContainer()->get('router'));
     }
-
 }
