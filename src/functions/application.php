@@ -17,7 +17,11 @@ if (!function_exists('app')) {
             return Container::getInstance();
         }
 
-        return Container::getInstance()->get($make, $parameters);
+        if (is_array($parameters) && count($parameters) > 0) {
+            return Container::getInstance()->make($make, $parameters);
+        }
+
+        return Container::getInstance()->get($make);
     }
 }
 
