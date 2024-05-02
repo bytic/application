@@ -42,24 +42,6 @@ trait BindPathsTrait
     }
 
     /**
-     * Bind all of the application paths in the container.
-     *
-     * @return void
-     */
-    public function bindPathsInContainer()
-    {
-        $this->set('path', $this->path());
-        $this->set('path.base', $this->basePath());
-        $this->set('path.lang', $this->langPath());
-        $this->set('path.config', $this->configPath());
-        $this->set('path.public', $this->publicPath());
-        $this->set('path.storage', $this->storagePath());
-        $this->set('path.database', $this->databasePath());
-        $this->set('path.resources', $this->resourcePath());
-        $this->set('path.bootstrap', $this->bootstrapPath());
-    }
-
-    /**
      * Get the path to the application "app" directory.
      *
      * @return string
@@ -161,11 +143,11 @@ trait BindPathsTrait
     /**
      * Get the path to the bootstrap directory.
      *
-     * @param  string  $path Optionally, a path to append to the bootstrap path
+     * @param string $path Optionally, a path to append to the bootstrap path
      * @return string
      */
     public function bootstrapPath($path = '')
     {
-        return $this->basePath() . DIRECTORY_SEPARATOR . 'bootstrap'.($path ? DIRECTORY_SEPARATOR.$path : $path);
+        return $this->basePath() . DIRECTORY_SEPARATOR . 'bootstrap' . ($path ? DIRECTORY_SEPARATOR . $path : $path);
     }
 }

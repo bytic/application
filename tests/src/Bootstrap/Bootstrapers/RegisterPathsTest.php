@@ -3,7 +3,7 @@
 namespace Nip\Application\Tests\Bootstrap\Bootstrapers;
 
 use Mockery\Mock;
-use Nip\Application\Bootstrap\Bootstrapers\RegisterPaths;
+use Nip\Application\DependencyInjection\RegisterPathsCompilerPass;
 use Nip\Application\Tests\AbstractTest;
 use Nip\Application\Tests\Fixtures\Library\Application;
 
@@ -19,7 +19,7 @@ class RegisterPathsTest extends AbstractTest
         $application = \Mockery::mock(Application::class)->makePartial();
         $application->shouldReceive('bindPathsInContainer')->once();
 
-        $bootstrapper = new RegisterPaths();
+        $bootstrapper = new RegisterPathsCompilerPass();
         $bootstrapper->bootstrap($application);
         self::assertTrue(true);
     }

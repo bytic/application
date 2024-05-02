@@ -27,7 +27,7 @@
   },
   "require": {
     "bytic/dotenv": "^4.0",
-    "bytic/container": "^0.9|^1.0|^2.0"
+    "bytic/container": "^1.0|^2.0"
   },
   "require-dev": {
     "bytic/config": "^0.9|^1.0",

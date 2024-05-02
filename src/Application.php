@@ -3,7 +3,6 @@
 namespace Nip\Application;
 
 use Nip\Application\Bootstrap\CoreBootstrapersTrait;
-use Nip\Application\Traits\AutoLoaderAwareTrait;
 use Nip\Container\ContainerAliasBindingsTrait;
 use Nip\Dispatcher\DispatcherAwareTrait;
 use Nip\Http\Response\Response;
@@ -23,11 +22,11 @@ class Application implements ApplicationInterface
     use Traits\EnviromentConfiguration;
     use Traits\HasLocaleTrait;
     use Traits\ExecutionTrait;
-    use Traits\ServiceProviderAwareTrait;
 
-    use ContainerAliasBindingsTrait;
+    use ContainerAliasBindingsTrait, Traits\ServiceProviderAwareTrait {
+        ContainerAliasBindingsTrait::addServiceProvider insteadof Traits\ServiceProviderAwareTrait;
+    }
     use CoreBootstrapersTrait;
-    use AutoLoaderAwareTrait;
     use RouterAwareTrait;
     use DispatcherAwareTrait;
     use StagingAwareTrait;
